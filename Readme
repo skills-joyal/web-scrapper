@@ -1,0 +1,6 @@
+# Install dependencies:
+# npm install puppeteer pdfkit fs
+
+
+# To run the file use the following command:
+# node scrape.js

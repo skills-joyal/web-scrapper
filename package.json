@@ -1,0 +1,14 @@
+{
+  "dependencies": {
+    "axios": "^1.8.4",
+    "fs": "^0.0.1-security",
+    "pdfkit": "^0.16.0",
+    "puppeteer": "^24.6.0",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "random-useragent": "^0.5.0"
+  },
+  "devDependencies": {
+    "@types/puppeteer": "^7.0.4"
+  }
+}
