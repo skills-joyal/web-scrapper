@@ -51,14 +51,18 @@ const countdown = async (seconds, where) => {
 
 const scrapeLeclerc = async () => {
   const browser = await puppeteer.launch({
-    headless: false,
+    headless: true,
     args: [
       '--no-sandbox',
       '--disable-setuid-sandbox',
       '--disable-blink-features=AutomationControlled',
-      '--window-size=1280,800'
+      '--window-size=1280,800',
+      '--use-fake-ui-for-media-stream',
     ]
   });
+
+  const context = browser.defaultBrowserContext();
+  await context.overridePermissions('https://fd1-courses.leclercdrive.fr', ['geolocation']);
 
   const page = await browser.newPage();
 
@@ -79,11 +83,15 @@ const scrapeLeclerc = async () => {
   await page.emulateTimezone('Europe/Paris');
   await page.setViewport({ width: 1280, height: 800 });
 
+  // Set geolocation and timezone (Paris, France)
+  await page.emulateTimezone('Europe/Paris');
+  await page.setGeolocation({ latitude: 48.8566, longitude: 2.3522 });
+
 
   console.log('Starting scrapping...');
   // let url = 'https://www.cricbuzz.com/'
   let url = 'https://fd1-courses.leclercdrive.fr/magasin-021701-saint-sulpice-de-royan.aspx'
-  await countdown(5, 'inital');
+  await countdown(2, 'inital');
   console.log('Page URL: '+url);
 
   const response = await page.goto(url, {
